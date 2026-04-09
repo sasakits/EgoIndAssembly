@@ -1,1 +1,91 @@
-<!DOCTYPE html><html><head><title>EgoIndAssembly</title></head><body><h1>EgoIndAssembly</h1><p>Coming soon.</p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EgoIndAssembly</title>
+  <meta name="description" content="EgoIndAssembly: Diagnosing Fine-Grained Temporal Hand Reasoning in Vision-Language Models for Skilled Assembly">
+  <style>
+    :root { --accent: #1a73e8; --bg: #fff; --text: #222; --muted: #555; --border: #e0e0e0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+    .container { max-width: 880px; margin: 0 auto; padding: 2rem 1.5rem; }
+    h1 { font-size: 1.9rem; text-align: center; margin-bottom: 0.3rem; }
+    .venue { text-align: center; color: var(--muted); margin-bottom: 0.5rem; }
+    h2 { font-size: 1.3rem; margin: 2rem 0 0.8rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--border); }
+    p { margin-bottom: 1rem; }
+    .highlight { background: #f8f9fa; border-left: 4px solid var(--accent); padding: 1rem 1.2rem; margin: 1.2rem 0; border-radius: 4px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 1.2rem 0; }
+    .stat-card { text-align: center; padding: 1.2rem; background: #f8f9fa; border-radius: 8px; }
+    .stat-card .num { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-card .label { font-size: 0.85rem; color: var(--muted); }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { padding: 0.5rem 0.7rem; border: 1px solid var(--border); text-align: center; }
+    th { background: #f1f3f4; font-weight: 600; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 0.3rem; }
+    .btn:hover { opacity: 0.85; }
+    .btn.secondary { background: #333; }
+    .links { text-align: center; margin: 1.5rem 0; }
+    pre { background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.85rem; line-height: 1.5; }
+    footer { text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>EgoIndAssembly</h1>
+  <p class="venue">CVPR 2026 Workshop on Skilled Activity Understanding, Assessment &amp; Feedback Generation (SAUAFG)</p>
+  <div class="links">
+    <a class="btn" href="#">Paper (coming soon)</a>
+    <a class="btn secondary" href="https://huggingface.co/datasets/TODO/EgoIndAssembly">Dataset (Hugging Face)</a>
+  </div>
+  <h2>Abstract</h2>
+  <p>Assessing procedural skill in industrial and medical assembly requires tracking <em>how hands manipulate specific components over time</em>&mdash;a capability we term <em>fine-grained temporal hand reasoning</em>. We introduce <strong>EgoIndAssembly</strong>, a diagnostic benchmark of 222 egocentric industrial and medical assembly videos that occupies a fundamentally harder regime than existing cooking/DIY benchmarks.</p>
+  <p>We formalize three diagnostic properties&mdash;semantic near-identity (P1), temporal hand-trajectory dependence (P2), and small discriminative regions (P3)&mdash;and conduct a baseline study spanning CLIP, hand-guided fusion, and VLM approaches. Our strongest baseline, Progressive Procedure Grounding (PPG), achieves 0.435 MoF (+73% over the best CLIP method), yet still misclassifies over half of all frames, quantifying the gap that must be closed before downstream skill assessment and feedback generation become viable.</p>
+  <h2>Dataset Overview</h2>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">222</div><div class="label">Videos</div></div>
+    <div class="stat-card"><div class="num">2,877</div><div class="label">Annotated Steps</div></div>
+    <div class="stat-card"><div class="num">13.0</div><div class="label">Avg Steps / Video</div></div>
+    <div class="stat-card"><div class="num">79%</div><div class="label">Unique Vocabulary</div></div>
+  </div>
+  <div class="highlight">
+    <strong>Three Diagnostic Properties:</strong><br>
+    <strong>P1</strong> Semantic Near-Identity &mdash; step labels are nearly indistinguishable in CLIP embedding space (mean cosine similarity 0.802).<br>
+    <strong>P2</strong> Temporal Hand-Trajectory Dependence &mdash; correct step assignment requires tracking hand motion over time.<br>
+    <strong>P3</strong> Small Discriminative Regions &mdash; critical visual differences are confined to small image regions.
+  </div>
+  <h2>Category Distribution</h2>
+  <table>
+    <tr><th>Category</th><th>Videos</th></tr>
+    <tr><td>Medical Device</td><td>188</td></tr>
+    <tr><td>Equipment Assembly</td><td>20</td></tr>
+    <tr><td>Other</td><td>7</td></tr>
+    <tr><td>Precision Instrument</td><td>4</td></tr>
+    <tr><td>Computer</td><td>1</td></tr>
+    <tr><td>Electronics</td><td>1</td></tr>
+    <tr><td>Furniture</td><td>1</td></tr>
+  </table>
+  <h2>Key Results</h2>
+  <table>
+    <tr><th>Method</th><th>MoF</th><th>tIoU</th></tr>
+    <tr><td>CLIP B0 (uniform)</td><td>0.145</td><td>0.183</td></tr>
+    <tr><td>CLIP B1 (similarity)</td><td>0.251</td><td>0.132</td></tr>
+    <tr><td>VLM (single-frame)</td><td colspan="2">architecture-dependent</td></tr>
+    <tr><td><strong>PPG (Ours)</strong></td><td><strong>0.435</strong></td><td><strong>0.232</strong></td></tr>
+  </table>
+  <h2>Download</h2>
+  <p>The annotations and video links are available on Hugging Face with gated access. Please submit an access request to download the dataset.</p>
+  <div class="links">
+    <a class="btn" href="https://huggingface.co/datasets/TODO/EgoIndAssembly">Request Access on Hugging Face</a>
+  </div>
+  <h2>Citation</h2>
+  <pre><code>@inproceedings{egoindassembly2026,
+  title     = {EgoIndAssembly: Diagnosing Fine-Grained Temporal Hand
+               Reasoning in Vision-Language Models for Skilled Assembly},
+  booktitle = {CVPR 2026 SAUAFG Workshop},
+  year      = {2026}
+}</code></pre>
+  <footer>EgoIndAssembly &copy; 2026. All videos are sourced from publicly available YouTube content.</footer>
+</div>
+</body>
+</html>
